@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #text,
+      #content {
+        margin-top: 20px;
+        padding: 15px;
+        border: 3px solid;
+        border-radius: 10px;
+        float: left;
+        position: relative;
+      }
+      .speak {
+        padding: 15px;
+        border: 3px solid;
+        border-radius: 25px;
+        float: right;
+        margin-right: 150px;
+        position: relative;
+        /* margin-bottom: 50px; */
+      }
+      .btn {
+        float: left;
+        margin-right: 150px;
+      }
+      .talk {
+        border: 1px solid red;
+        height: fit-content;
+        padding: 10px 20px;
+        border-radius: 5px;
+        display: flex;
+        margin: 10px 0;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        cursor: pointer;
+        background-color: red;
+      }
+      .talk:hover {
+        background-color: orangered;
+      }
+
+      body {
+        background: #7678ed;
+      }
+      .grn_talk {
+        background-color: green;
+      }
+
+      .grn_talk:hover {
+        background-color: darkgreen;
+      }
+      .my-box {
+        max-height: 200px;
+        max-width: 500px;
+        min-width: 500px;
+        min-height: 200px;
+      }
+
+      .row {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-around;
+      }
+      .col {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  />
+  <body>
+    <img
+      src="https://www.temi.com/blog/wp-content/uploads/2017/10/rev-pastpresentfuture.gif"
+      alt="image"
+      style="
+        display: block;
+        height: 350px;
+        margin-left: auto;
+        margin-right: auto;
+        border: 1px solid;
+        border-radius: 15px;
+      "
+    />
+    <form class="row" action="/form" method="post">
+      <div class="col">
+        <textarea
+          name="data"
+          id="text"
+          rows="4"
+          cols="50"
+          placeholder="Type here..."
+          style="height: 200px"
+          class="my-box"
+        ></textarea>
+        <button type="button" id="mic" class="talk">
+          <i class="material-icons" style="font-size: 1000 px"> mic </i>
+          <span>Speak</span>
+        </button>
+      </div>
+      <div class="col">
+        <textarea
+          name="data1"
+          id="content"
+          rows="4"
+          cols="50"
+          placeholder="Turn on the mic and speak"
+          style="height: 200px"
+          readonly
+          class="my-box"
+        ></textarea>
+        <button type="submit" id="mic1" class="talk grn_talk">
+          <i class="material-icons" style="font-size: 1000 px"> check </i>
+          <span>Submit</span>
+        </button>
+      </div>
+    </form>
+    <script src="{{url_for('static', filename='app.js')}}"></script>
+  </body>
+</html>
