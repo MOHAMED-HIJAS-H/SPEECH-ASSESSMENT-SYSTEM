@@ -2,6 +2,21 @@ const btn = document.querySelector(".talk");
 const content = document.querySelector("#content");
 const mike = document.getElementById("mic");
 const mike1 = document.getElementById("mic1");
+const RANDOM_QUOTE_API_URL = "http://api.quotable.io/random";
+const textElement = document.getElementById("text");
+
+function getRandomQuote() {
+  return fetch(RANDOM_QUOTE_API_URL)
+    .then((RESPONSE) => RESPONSE.json())
+    .then((data) => data.content);
+}
+
+async function renderNewQuote() {
+  let a = await getRandomQuote();
+  textElement.innerText = a;
+}
+renderNewQuote();
+
 document.getElementById("mic").addEventListener("click", StartMike);
 document.getElementById("mic1").addEventListener("click", StopMike);
 var mike_status = false;
