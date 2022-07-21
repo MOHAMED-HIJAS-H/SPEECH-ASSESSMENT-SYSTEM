@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Speech Analysis</title>
     <style>
       #text,
       #content {
@@ -80,18 +80,42 @@
     href="https://fonts.googleapis.com/icon?family=Material+Icons"
   />
   <body>
-    <img
-      src="https://www.temi.com/blog/wp-content/uploads/2017/10/rev-pastpresentfuture.gif"
-      alt="image"
-      style="
-        display: block;
-        height: 350px;
-        margin-left: auto;
-        margin-right: auto;
-        border: 1px solid;
-        border-radius: 15px;
-      "
-    />
+    <center>
+      <h1
+        style="
+          color: #fff;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          margin-left: 30px;
+        "
+      >
+        SPEECH ASSESSMENT SYSTEM
+      </h1>
+    </center>
+    <div class="row" style="justify-content: space-around">
+      <img
+        src="https://play-lh.googleusercontent.com/zmwJ6vHoB-YzXbRVHBbri05oVLOl8qKXKp-8Hmfsd28-L4wTwG-tvCSK2in7J7Tn05UA"
+        alt="BIT logo"
+        style="
+          display: block;
+          height: 150px;
+          width: 150px;
+          margin-left: 350px;
+          margin-right: 30px;
+        "
+      />
+
+      <img
+        src="{{url_for('static', filename='speech.png')}}"
+        alt="image"
+        style="
+          display: block;
+          width: 500px;
+          border: 1px solid;
+          border-radius: 15px;
+          margin-right: 400px;
+        "
+      />
+    </div>
     <form class="row" action="/form" method="post">
       <div class="col">
         <textarea
@@ -114,7 +138,7 @@
           id="content"
           rows="4"
           cols="50"
-          placeholder="Turn on the mic and speak"
+          placeholder="see what you have read!"
           style="height: 200px"
           readonly
           class="my-box"
