@@ -8,6 +8,10 @@ CORS(app)
 
 @app.route("/")
 def home():
+   return render_template("login.html")
+
+@app.route("/index")
+def home2():
    return render_template("index.html")
       
 
