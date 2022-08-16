@@ -68,10 +68,35 @@
         align-items: center;
         justify-content: space-around;
       }
+
       .col {
         display: flex;
         flex-direction: column;
         justify-content: center;
+      }
+
+      #account {
+        border-radius: 50%;
+        height: 50px;
+        float: right;
+        margin: 15px;
+        /* margin-top: 25%; */
+      }
+
+      #sign_in {
+        /* width: 100px;
+        height: 80px; */
+        float: inline-end;
+      }
+
+      #signout {
+        margin-top: 1.5%;
+        background-color: red;
+        border: red 7px solid;
+        border-radius: 8px;
+        color: white;
+        float: right;
+        cursor: pointer;
       }
     </style>
   </head>
@@ -80,17 +105,22 @@
     href="https://fonts.googleapis.com/icon?family=Material+Icons"
   />
   <body>
+    <button type="button" id="signout" style="float: right">Sign Out</button>
+    <img src=" " id="account" alt />
     <center>
       <h1
         style="
           color: #fff;
           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-          margin-left: 30px;
+          margin-left: 60px;
         "
       >
         SPEECH ASSESSMENT SYSTEM
       </h1>
+
+      <!-- <button type="button" id="sign_in" style="float: right">Login</button> -->
     </center>
+
     <div class="row" style="justify-content: space-around">
       <img
         src="https://play-lh.googleusercontent.com/zmwJ6vHoB-YzXbRVHBbri05oVLOl8qKXKp-8Hmfsd28-L4wTwG-tvCSK2in7J7Tn05UA"
@@ -150,5 +180,63 @@
       </div>
     </form>
     <script src="{{url_for('static', filename='app.js')}}"></script>
+    <script type="module">
+      import {
+        getAuth,
+        GoogleAuthProvider,
+        getRedirectResult,
+        signInWithPopup,
+        signOut,
+        onAuthStateChanged,
+      } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-auth.js";
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-app.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyDAlOyM1ultiDAJp8kBi9KcVF0OcZdXXr8",
+        authDomain: "speech-test-9a232.firebaseapp.com",
+        projectId: "speech-test-9a232",
+        storageBucket: "speech-test-9a232.appspot.com",
+        messagingSenderId: "974487713478",
+        appId: "1:974487713478:web:acf4df37cfd533ca9d09c7",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const provider = new GoogleAuthProvider(app);
+
+      // sign_in.addEventListener("click", (e) => {
+      //   signInWithPopup(auth, provider).catch((error) => {
+      //     // Handle Errors here.
+      //     const errorCode = error.code;
+      //     const errorMessage = error.message;
+      //     // The email of the user's accountount used.
+      //     const email = error.customData.email;
+      //     // The AuthCredential type that was used.
+      //     const credential = GoogleAuthProvider.credentialFromError(error);
+      //     // ...
+      //     alert(errorMessage);
+      //   });
+      // }); // sign in
+
+      signout.addEventListener("click", (e) => {
+        signOut(auth).catch((error) => {
+          // An error happened.
+        });
+      }); // sign out
+
+      onAuthStateChanged(auth, (user) => {
+        if (user != null) {
+          let a = user.photoURL;
+          document.getElementById("account").src = a; //displays user profile
+          document.getElementById("signout").style.display = "block"; //displays sign out button
+          // document.getElementById("sign_in").style.display = "none"; //hides google gif button
+        } // if user is signed in
+        else {
+          window.location.href = "/";
+          document.getElementById("sign_in").style.display = "block"; //displays google gif button
+        } // if not
+      }); // function to check whether user is signed in or not (inbuilt in firebase)
+    </script>
   </body>
 </html>
