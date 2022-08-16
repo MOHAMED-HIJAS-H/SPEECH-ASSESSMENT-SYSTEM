@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In</title>
+    <style>
+      /* #account {
+        border-radius: 50%;
+        height: 50px;
+         margin-top: 25%; 
+      } */
+
+      #sign_in {
+        /* width: 100px;
+        height: 80px; */
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        /* background-color: white; */
+        border: #3ab4f2 7px solid;
+        border-radius: 10px;
+        color: black;
+        cursor: pointer;
+        margin-bottom: 200px;
+      }
+
+      #content {
+        max-width: fit-content;
+        margin-top: 10%;
+        margin-left: 48%;
+
+        padding: 10px;
+      }
+
+      body {
+        background: #7678ed;
+      }
+    </style>
+  </head>
+  <body>
+    <center>
+      <h1
+        style="
+          color: #fff;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          margin-left: 1%;
+        "
+      >
+        SPEECH ASSESSMENT SYSTEM
+      </h1>
+
+      <!-- <button type="button" id="sign_in" style="float: right">Login</button> -->
+    </center>
+    <img
+      src="{{url_for('static', filename='speech.png')}}"
+      alt="image"
+      style="
+        margin: 0 auto;
+        display: block;
+        width: 500px;
+        border: 1px solid;
+        border-radius: 15px;
+        margin-top: 3%;
+      "
+    />
+    <div id="content">
+      <button
+        type="button"
+        id="sign_in"
+        style="float: right; margin-bottom: 5%"
+      >
+        Login
+      </button>
+      <!-- <button type="button" id="signout" style="float: right">Sign Out</button> -->
+    </div>
+
+    <script type="module">
+      import {
+        getAuth,
+        GoogleAuthProvider,
+        getRedirectResult,
+        signInWithPopup,
+        signOut,
+        onAuthStateChanged,
+      } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-auth.js";
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-app.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyDAlOyM1ultiDAJp8kBi9KcVF0OcZdXXr8",
+        authDomain: "speech-test-9a232.firebaseapp.com",
+        projectId: "speech-test-9a232",
+        storageBucket: "speech-test-9a232.appspot.com",
+        messagingSenderId: "974487713478",
+        appId: "1:974487713478:web:acf4df37cfd533ca9d09c7",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const provider = new GoogleAuthProvider(app);
+
+      sign_in.addEventListener("click", (e) => {
+        signInWithPopup(auth, provider).catch((error) => {
+          // Handle Errors here.
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // The email of the user's accountount used.
+          const email = error.customData.email;
+          // The AuthCredential type that was used.
+          const credential = GoogleAuthProvider.credentialFromError(error);
+          // ...
+          alert(errorMessage);
+          window.location.href = "/index";
+        });
+      }); // sign in
+
+      onAuthStateChanged(auth, (user) => {
+        if (user != null) {
+          window.location.href = "/index";
+          let a = user.photoURL;
+          document.getElementById("account").src = a; //displays user profile
+          document.getElementById("signout").style.display = "block"; //displays sign out button
+          document.getElementById("sign_in").style.display = "none"; //hides google gif button
+        } // if user is signed in
+        else {
+          document.getElementById("sign_in").style.display = "block"; //displays google gif button
+        } // if not
+      }); // function to check whether user is signed in or not (inbuilt in firebase)
+    </script>
+  </body>
+</html>
